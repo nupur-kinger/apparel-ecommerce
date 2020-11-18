@@ -17,12 +17,10 @@ import { selectCurrentUser } from './redux/user/user.selectors';
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
-
   componentDidMount() {
     const { setCurrentUser } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      console.log("Auth state changed in App.js");
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
@@ -52,11 +50,11 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
-          <Route path='/checkout' component={ CheckoutPage } />
-          <Route exact path='/signin' render={() => 
-            this.props.currentUser 
-              ? (<Redirect to='/' />) 
-              : (<SignInAndSignUpPage />) } />
+          <Route path='/checkout' component={CheckoutPage} />
+          <Route exact path='/signin' render={() =>
+            this.props.currentUser
+              ? (<Redirect to='/' />)
+              : (<SignInAndSignUpPage />)} />
         </Switch>
       </div>
     );
